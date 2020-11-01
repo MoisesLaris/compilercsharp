@@ -23,7 +23,12 @@ namespace CompiladorRiquin
     public enum TipoNodo
     {
         sent,
-        exp
+        exp,
+        integer,
+        float_number,
+        boolean,
+
+
     }
 
     public class nodo
@@ -554,18 +559,28 @@ namespace CompiladorRiquin
         public nodo fin()
         {
 
-            float number;
+            float real;
+            int integer;
             nodo temp = null;
             if(MainWindow.getToken().getLexema() == "(")
             {
                 match("(");
                 temp = exp();
                 match(")");
-            }else if (float.TryParse(MainWindow.getToken().getLexema(), out number))
+            }
+            else if (int.TryParse(MainWindow.getToken().getLexema(), out integer))
             {
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp);
+                Console.WriteLine("Numero entero -> " + integer);
+                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.integer);
                 MainWindow.iterator++;
-            }else if (MainWindow.getToken().getTipo() == TipoToken.ID)
+            }
+            else if (float.TryParse(MainWindow.getToken().getLexema(), out real))
+            {
+                Console.WriteLine("Numero real -> " + real);
+                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.float_number);
+                MainWindow.iterator++;
+            }
+            else if (MainWindow.getToken().getTipo() == TipoToken.ID)
             {
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp);
                 MainWindow.iterator++;
