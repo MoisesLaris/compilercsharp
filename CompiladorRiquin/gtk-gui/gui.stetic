@@ -167,11 +167,17 @@
         <property name="ShortLabel" translatable="yes">Ejecutar</property>
         <signal name="Activated" handler="OnEjecutarActionActivated" />
       </action>
-      <action id="EjecutarAction1">
+      <action id="EjecutarAction5">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Ejecutar</property>
         <property name="ShortLabel" translatable="yes">Ejecutar</property>
         <signal name="Activated" handler="OnEjecutarAction1Activated" />
+      </action>
+      <action id="EjecutarAction6">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Ejecutar</property>
+        <property name="ShortLabel" translatable="yes">Ejecutar</property>
+        <signal name="Activated" handler="OnEjecutarSemantico" />
       </action>
     </action-group>
     <property name="MemberName" />
@@ -248,9 +254,11 @@
                     <node type="Menuitem" action="EjecutarAction" />
                   </node>
                   <node type="Menu" action="SintacticoAction">
-                    <node type="Menuitem" action="EjecutarAction1" />
+                    <node type="Menuitem" action="EjecutarAction5" />
                   </node>
-                  <node type="Menu" action="SemanticoAction" />
+                  <node type="Menu" action="SemanticoAction">
+                    <node type="Menuitem" action="EjecutarAction6" />
+                  </node>
                   <node type="Menu" action="CompilarAction" />
                   <node type="Menu" action="Action" />
                 </node>
@@ -363,7 +371,7 @@
                   <widget class="Gtk.Notebook" id="notebook2">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">1</property>
+                    <property name="CurrentPage">3</property>
                     <child>
                       <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow2">
                         <property name="MemberName" />
@@ -444,11 +452,10 @@
                         <property name="MemberName" />
                         <property name="ShadowType">In</property>
                         <child>
-                          <widget class="Gtk.TextView" id="textview11">
+                          <widget class="Gtk.NodeView" id="nodeview1">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="ShowScrollbars">True</property>
-                            <property name="Text" translatable="yes" />
                           </widget>
                         </child>
                       </widget>

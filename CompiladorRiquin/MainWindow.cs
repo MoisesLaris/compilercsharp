@@ -25,6 +25,9 @@ public partial class MainWindow : Gtk.Window
     public static List<Token> listaTokens = new List<Token>();
     public static int iterator = 0;
 
+    //Arbol generado en analizador sintactico
+    public static nodo arbolSintactico;
+
     public MainWindow() : base(Gtk.WindowType.Toplevel)
     {
         Build();
@@ -579,9 +582,9 @@ public partial class MainWindow : Gtk.Window
 
         removeAllColumns(treeview1);
 
-        nodo nodo = new nodo();
+        nodo nodo = new nodo(); //Aqui se ejecuta el analizador SINTACTICO
         nodo = nodo.programa();
-
+        
         textview6.Buffer.Text = erroresSintactico;
 
         
@@ -597,8 +600,9 @@ public partial class MainWindow : Gtk.Window
         columna.AddAttribute(celda, "text", 0);
         Gtk.TreeStore lista = new Gtk.TreeStore(typeof(string));
         verArbol(nodo, lista);
-        
+        treeview1.ExpandAll(); //Propiedad para expandir el arbol
 
+        arbolSintactico = nodo; //Asignamos el arbol del analizador sintactico a nuestra variable estatica
     }
 
 
@@ -692,7 +696,68 @@ public partial class MainWindow : Gtk.Window
             treeView.RemoveColumn(treeViewColumn);
     }
 
+    protected void OnEjecutarSemantico(object sender, EventArgs e)
+    {
+        if(arbolSintactico == null)
+        {
+            return;
+        }
 
 
+        Semantico.fnResetRun(); //Se resetea diccionario y String de errores semanticos
+        Semantico semantico = new Semantico(arbolSintactico);
+        semantico.mainSintactico();
 
+        buildHashTable();
+
+    }
+
+    public void buildHashTable()
+    {
+        
+
+        NodeStore store = new Gtk.NodeStore(typeof(MyTreeNode));
+        foreach (var item in Semantico.tablaHash)
+        {
+            store.AddNode(new MyTreeNode(item.Value.nombre, item.Value.location, " ", "Tipo", item.Value.valor));
+        }
+
+        nodeview1.NodeStore = store;
+        nodeview1.AppendColumn("Nombre", new Gtk.CellRendererText(), "text", 0);
+        nodeview1.AppendColumn("Locación", new Gtk.CellRendererText(), "text", 1);
+        nodeview1.AppendColumn("Lineas", new Gtk.CellRendererText(), "text", 2);
+        nodeview1.AppendColumn("Tipo", new Gtk.CellRendererText(), "text", 3);
+        nodeview1.AppendColumn("Valor", new Gtk.CellRendererText(), "text", 4);
+
+    }
+
+}
+
+[Gtk.TreeNode(ListOnly = true)]
+public class MyTreeNode : Gtk.TreeNode
+{
+
+    public MyTreeNode(string nombre, string location, string lineas, string tipo, string valor)
+    {
+        this.nombre = nombre;
+        this.location = location;
+        this.lineas = lineas;
+        this.tipo = tipo;
+        this.valor = valor;
+    }
+
+    [Gtk.TreeNodeValue(Column = 0)]
+    public string nombre;
+
+    [Gtk.TreeNodeValue(Column = 1)]
+    public string location;
+
+    [Gtk.TreeNodeValue(Column = 2)]
+    public string lineas;
+
+    [Gtk.TreeNodeValue(Column = 3)]
+    public string tipo;
+
+    [Gtk.TreeNodeValue(Column = 4)]
+    public string valor;
 }

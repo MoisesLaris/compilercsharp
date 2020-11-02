@@ -65,7 +65,9 @@ public partial class MainWindow
 
 	private global::Gtk.Action EjecutarAction;
 
-	private global::Gtk.Action EjecutarAction1;
+	private global::Gtk.Action EjecutarAction5;
+
+	private global::Gtk.Action EjecutarAction6;
 
 	private global::Gtk.VBox vbox1;
 
@@ -117,7 +119,7 @@ public partial class MainWindow
 
 	private global::Gtk.ScrolledWindow GtkScrolledWindow9;
 
-	private global::Gtk.TextView textview11;
+	private global::Gtk.NodeView nodeview1;
 
 	private global::Gtk.Label label8;
 
@@ -254,9 +256,12 @@ public partial class MainWindow
 		this.EjecutarAction = new global::Gtk.Action("EjecutarAction", global::Mono.Unix.Catalog.GetString("Ejecutar"), null, null);
 		this.EjecutarAction.ShortLabel = global::Mono.Unix.Catalog.GetString("Ejecutar");
 		w1.Add(this.EjecutarAction, null);
-		this.EjecutarAction1 = new global::Gtk.Action("EjecutarAction1", global::Mono.Unix.Catalog.GetString("Ejecutar"), null, null);
-		this.EjecutarAction1.ShortLabel = global::Mono.Unix.Catalog.GetString("Ejecutar");
-		w1.Add(this.EjecutarAction1, null);
+		this.EjecutarAction5 = new global::Gtk.Action("EjecutarAction5", global::Mono.Unix.Catalog.GetString("Ejecutar"), null, null);
+		this.EjecutarAction5.ShortLabel = global::Mono.Unix.Catalog.GetString("Ejecutar");
+		w1.Add(this.EjecutarAction5, null);
+		this.EjecutarAction6 = new global::Gtk.Action("EjecutarAction6", global::Mono.Unix.Catalog.GetString("Ejecutar"), null, null);
+		this.EjecutarAction6.ShortLabel = global::Mono.Unix.Catalog.GetString("Ejecutar");
+		w1.Add(this.EjecutarAction6, null);
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -300,7 +305,7 @@ public partial class MainWindow
 		w4.Position = 2;
 		w4.Expand = false;
 		// Container child hbox3.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString(@"<ui><menubar name='menubar5'><menu name='LexicoAction' action='LexicoAction'><menuitem name='EjecutarAction' action='EjecutarAction'/></menu><menu name='SintacticoAction' action='SintacticoAction'><menuitem name='EjecutarAction1' action='EjecutarAction1'/></menu><menu name='SemanticoAction' action='SemanticoAction'/><menu name='CompilarAction' action='CompilarAction'/><menu name='Action' action='Action'/></menubar></ui>");
+		this.UIManager.AddUiFromString(@"<ui><menubar name='menubar5'><menu name='LexicoAction' action='LexicoAction'><menuitem name='EjecutarAction' action='EjecutarAction'/></menu><menu name='SintacticoAction' action='SintacticoAction'><menuitem name='EjecutarAction5' action='EjecutarAction5'/></menu><menu name='SemanticoAction' action='SemanticoAction'><menuitem name='EjecutarAction6' action='EjecutarAction6'/></menu><menu name='CompilarAction' action='CompilarAction'/><menu name='Action' action='Action'/></menubar></ui>");
 		this.menubar5 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget("/menubar5")));
 		this.menubar5.Name = "menubar5";
 		this.hbox3.Add(this.menubar5);
@@ -380,7 +385,7 @@ public partial class MainWindow
 		this.notebook2 = new global::Gtk.Notebook();
 		this.notebook2.CanFocus = true;
 		this.notebook2.Name = "notebook2";
-		this.notebook2.CurrentPage = 1;
+		this.notebook2.CurrentPage = 3;
 		// Container child notebook2.Gtk.Notebook+NotebookChild
 		this.GtkScrolledWindow2 = new global::Gtk.ScrolledWindow();
 		this.GtkScrolledWindow2.Name = "GtkScrolledWindow2";
@@ -439,10 +444,10 @@ public partial class MainWindow
 		this.GtkScrolledWindow9.Name = "GtkScrolledWindow9";
 		this.GtkScrolledWindow9.ShadowType = ((global::Gtk.ShadowType)(1));
 		// Container child GtkScrolledWindow9.Gtk.Container+ContainerChild
-		this.textview11 = new global::Gtk.TextView();
-		this.textview11.CanFocus = true;
-		this.textview11.Name = "textview11";
-		this.GtkScrolledWindow9.Add(this.textview11);
+		this.nodeview1 = new global::Gtk.NodeView();
+		this.nodeview1.CanFocus = true;
+		this.nodeview1.Name = "nodeview1";
+		this.GtkScrolledWindow9.Add(this.nodeview1);
 		this.notebook2.Add(this.GtkScrolledWindow9);
 		global::Gtk.Notebook.NotebookChild w20 = ((global::Gtk.Notebook.NotebookChild)(this.notebook2[this.GtkScrolledWindow9]));
 		w20.Position = 3;
@@ -620,7 +625,8 @@ public partial class MainWindow
 		this.saveAction.Activated += new global::System.EventHandler(this.OnSaveActionActivated);
 		this.saveAsAction.Activated += new global::System.EventHandler(this.OnSaveAsActionActivated);
 		this.EjecutarAction.Activated += new global::System.EventHandler(this.OnEjecutarActionActivated);
-		this.EjecutarAction1.Activated += new global::System.EventHandler(this.OnEjecutarAction1Activated);
+		this.EjecutarAction5.Activated += new global::System.EventHandler(this.OnEjecutarAction1Activated);
+		this.EjecutarAction6.Activated += new global::System.EventHandler(this.OnEjecutarSemantico);
 		this.textview3.PasteClipboard += new global::System.EventHandler(this.OnTextview3PasteClipboard);
 		this.textview3.InsertAtCursor += new global::Gtk.InsertAtCursorHandler(this.OnTextview3InsertAtCursor);
 		this.textview3.CutClipboard += new global::System.EventHandler(this.OnTextview3CutClipboard);
