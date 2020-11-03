@@ -41,9 +41,64 @@ namespace CompiladorRiquin
                         nodo.hijos[0].valor = fnCalcularValor(nodo.hijos[1]);
                         fnUpdateHashTable(nodo.hijos[0], nodo.hijos[1].tipoNodo);
                         break;
+                    case "while":
+                    case "if": //Condición if
+                        fnCheckConditions(nodo.hijos[0]);
+                        for (int i = 1; i < nodo.hijos.Count; i++)
+                            listaSentencias(nodo.hijos[i]);
+                        break;
+                    case "do":
+                        listaSentencias(nodo.hijos[0]);
+                        fnCheckConditions(nodo.hijos[1]);
+                        break;
+
                 }
             });
             
+        }
+
+        public void fnCheckConditions(nodo arbol)
+        {
+            arbol.tipoNodo = TipoNodo.boolean;
+            switch (arbol.nombre)
+            {
+                case "==":
+                    if (fnCalcularValor(arbol.hijos[0]) == fnCalcularValor(arbol.hijos[1]))
+                        arbol.valor = 1;
+                    else
+                        arbol.valor = 0;
+                    break;
+                case "!=":
+                    if (fnCalcularValor(arbol.hijos[0]) != fnCalcularValor(arbol.hijos[1]))
+                        arbol.valor = 1;
+                    else
+                        arbol.valor = 0;
+                    break;
+                case ">=":
+                    if (fnCalcularValor(arbol.hijos[0]) >= fnCalcularValor(arbol.hijos[1]))
+                        arbol.valor = 1;
+                    else
+                        arbol.valor = 0;
+                    break;
+                case ">":
+                    if (fnCalcularValor(arbol.hijos[0]) > fnCalcularValor(arbol.hijos[1]))
+                        arbol.valor = 1;
+                    else
+                        arbol.valor = 0;
+                    break;
+                case "<=":
+                    if (fnCalcularValor(arbol.hijos[0]) <= fnCalcularValor(arbol.hijos[1]))
+                        arbol.valor = 1;
+                    else
+                        arbol.valor = 0;
+                    break;
+                case "<":
+                    if (fnCalcularValor(arbol.hijos[0]) < fnCalcularValor(arbol.hijos[1]))
+                        arbol.valor = 1;
+                    else
+                        arbol.valor = 0;
+                    break;
+            }
         }
 
         public float fnCalcularValor(nodo arbol)
@@ -61,6 +116,9 @@ namespace CompiladorRiquin
                     break;
                 case "/":
                     arbol.valor = fnCalcularValor(arbol.hijos[0]) / fnCalcularValor(arbol.hijos[1]);
+                    break;
+                case "^":
+                    arbol.valor = (float)Math.Pow(fnCalcularValor(arbol.hijos[0]), fnCalcularValor(arbol.hijos[1]));
                     break;
             }
             Console.WriteLine(arbol.nombre + " -> " + arbol.linea.ToString());
@@ -91,7 +149,7 @@ namespace CompiladorRiquin
 
         public TipoNodo fnCheckNode(nodo raiz)
         {
-            if(raiz.hijos[0].tipoNodo != raiz.hijos[0].tipoNodo)
+            if(raiz.hijos[0].tipoNodo != raiz.hijos[1].tipoNodo)
             {
                 if((raiz.hijos[0].tipoNodo == TipoNodo.boolean || raiz.hijos[0].tipoNodo == TipoNodo.boolean))
                 {
@@ -101,7 +159,7 @@ namespace CompiladorRiquin
             }
             else
             {
-                return TipoNodo.integer;
+                return raiz.hijos[0].tipoNodo;
             }
         }
 

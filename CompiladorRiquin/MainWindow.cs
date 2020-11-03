@@ -767,7 +767,7 @@ public partial class MainWindow : Gtk.Window
                 valor += " (Float: " + arbol.valor.ToString() + " )"; 
                 break;
             case TipoNodo.boolean:
-                valor += " (Bool: " + arbol.valor.ToString() + " )"; 
+                valor += " (Bool: " + (arbol.valor == 1 ? "true" : "false") + " )"; 
                 break;
         }
         return valor;
