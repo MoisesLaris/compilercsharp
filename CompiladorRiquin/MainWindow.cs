@@ -714,12 +714,31 @@ public partial class MainWindow : Gtk.Window
 
     public void buildHashTable()
     {
-        
 
+        textview7.Buffer.Text = Semantico.erroresSemanticos;
+        string typeString = "", lista = "";
+        
         NodeStore store = new Gtk.NodeStore(typeof(MyTreeNode));
         foreach (var item in Semantico.tablaHash)
         {
-            store.AddNode(new MyTreeNode(item.Value.nombre, item.Value.location, " ", "Tipo", item.Value.valor));
+            switch (item.Value.tipo)
+            {
+                case TipoNodo.integer:
+                    typeString = "Int";
+                    break;
+                case TipoNodo.float_number:
+                    typeString = "Float";
+                    break;
+                case TipoNodo.boolean:
+                    typeString = "Boolean";
+                    break;
+            }
+            lista = "";
+            item.Value.lista.ForEach(element =>
+            {
+                lista += element.ToString() + " ";
+            }); 
+            store.AddNode(new MyTreeNode(item.Value.nombre, item.Value.location, lista, typeString, item.Value.valor.ToString()));
         }
 
         nodeview1.NodeStore = store;

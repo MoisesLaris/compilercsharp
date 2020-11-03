@@ -27,6 +27,7 @@ namespace CompiladorRiquin
         integer,
         float_number,
         boolean,
+        id,
 
 
     }
@@ -35,7 +36,7 @@ namespace CompiladorRiquin
     {
         public string nombre;
         public TipoNodo tipoNodo;
-        public string valor;
+        public float valor;
         public int linea;
         public List<nodo> hijos = new List<nodo>(); 
 
@@ -573,19 +574,19 @@ namespace CompiladorRiquin
             {
                 Console.WriteLine("Numero entero -> " + integer);
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.integer);
-                temp.valor = integer.ToString();
+                temp.valor = integer;
                 MainWindow.iterator++;
             }
             else if (float.TryParse(MainWindow.getToken().getLexema(), out real))
             {
                 Console.WriteLine("Numero real -> " + real);
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.float_number);
-                temp.valor = real.ToString();
+                temp.valor = real;
                 MainWindow.iterator++;
             }
             else if (MainWindow.getToken().getTipo() == TipoToken.ID)
             {
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp);
+                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.id);
                 MainWindow.iterator++;
             }
             else
@@ -601,7 +602,7 @@ namespace CompiladorRiquin
             nodo temp = null;
             if(MainWindow.getToken().getTipo() == TipoToken.ID)
             {
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp);
+                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.id);
                 temp.linea = MainWindow.getToken().getFila();
                 MainWindow.iterator++;
             }
