@@ -605,43 +605,6 @@ public partial class MainWindow : Gtk.Window
         arbolSintactico = nodo; //Asignamos el arbol del analizador sintactico a nuestra variable estatica
     }
 
-
-
-
-    //public void verArbol(nodo arbol, TreeStore lista, TreeIter iter)
-    //{
-    //    if (arbol != null)
-    //    {
-    //        TreeIter iter1 = lista.AppendValues(iter,arbol.nombre);
-    //        Console.WriteLine("Nodo-> " + arbol.nombre);
-            
-
-    //        if (arbol.hermano != null)
-    //        {
-    //            verArbol(arbol.hermano, lista, iter);
-    //        }
-    //    }
-    //    treeview1.Model = lista;
-    //}
-
-    //public void verArbol(nodo arbol, TreeStore lista)
-    //{
-    //    if (arbol != null)
-    //    {
-    //        TreeIter iter1 = lista.AppendValues(arbol.nombre);
-    //        Console.WriteLine("Nodo-> " + arbol.nombre);
-
-    //        verArbol(arbol.nodos[0], lista, iter1);
-    //        verArbol(arbol.nodos[1], lista, iter1);
-    //        verArbol(arbol.nodos[2], lista, iter1);
-    //        if (arbol.hermano != null)
-    //        {
-    //            verArbol(arbol.hermano, lista, iter1);
-    //        }
-    //    }
-    //    treeview1.Model = lista;
-    //}
-
     public void verArbol(nodo arbol, TreeStore lista)
     {
         if (arbol != null)
@@ -710,6 +673,22 @@ public partial class MainWindow : Gtk.Window
 
         buildHashTable();
 
+
+        //Dibujamos el arbol semantico
+        Gtk.TreeViewColumn columna = new Gtk.TreeViewColumn();
+        columna.Title = "Arbol";
+
+
+        Gtk.CellRendererText celda = new Gtk.CellRendererText();
+        columna.PackStart(celda, true);
+
+
+        treeview2.AppendColumn(columna);
+        columna.AddAttribute(celda, "text", 0);
+        Gtk.TreeStore lista = new Gtk.TreeStore(typeof(string));
+        verArbolSemantico(semantico.getArbol(), lista);
+        treeview2.ExpandAll(); //Propiedad para expandir el arbol
+
     }
 
     public void buildHashTable()
@@ -748,6 +727,50 @@ public partial class MainWindow : Gtk.Window
         nodeview1.AppendColumn("Tipo", new Gtk.CellRendererText(), "text", 3);
         nodeview1.AppendColumn("Valor", new Gtk.CellRendererText(), "text", 4);
 
+    }
+    public void verArbolSemantico(nodo arbol, TreeStore lista)
+    {
+        if (arbol != null)
+        {
+            TreeIter iter1 = lista.AppendValues(getTypeNode(arbol));
+            arbol.hijos.ForEach(hijo =>
+            {
+                verArbolSemantico(hijo, lista, iter1);
+            });
+        }
+        treeview2.Model = lista;
+    }
+
+    public void verArbolSemantico(nodo arbol, TreeStore lista, TreeIter iter)
+    {
+        if (arbol != null)
+        {
+            
+            TreeIter iter1 = lista.AppendValues(iter, getTypeNode(arbol));
+            arbol.hijos.ForEach(hijo =>
+            {
+                verArbolSemantico(hijo, lista, iter1);
+            });
+        }
+        treeview2.Model = lista;
+    }
+
+    public string getTypeNode(nodo arbol)
+    {
+        string valor = arbol.nombre;
+        switch (arbol.tipoNodo)
+        {
+            case TipoNodo.integer:
+                valor += " (Int: " + arbol.valor.ToString() + " )";
+                break;
+            case TipoNodo.float_number:
+                valor += " (Float: " + arbol.valor.ToString() + " )"; 
+                break;
+            case TipoNodo.boolean:
+                valor += " (Bool: " + arbol.valor.ToString() + " )"; 
+                break;
+        }
+        return valor;
     }
 
 }

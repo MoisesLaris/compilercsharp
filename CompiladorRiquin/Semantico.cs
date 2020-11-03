@@ -15,6 +15,11 @@ namespace CompiladorRiquin
             this.arbol = arbol;
         }
 
+        public nodo getArbol()
+        {
+            return this.arbol;
+        }
+
 
         public void mainSintactico()
         {
@@ -58,18 +63,20 @@ namespace CompiladorRiquin
                     arbol.valor = fnCalcularValor(arbol.hijos[0]) / fnCalcularValor(arbol.hijos[1]);
                     break;
             }
+            Console.WriteLine(arbol.nombre + " -> " + arbol.linea.ToString());
 
             if (arbol.tipoNodo == TipoNodo.id) //un numero o un id son el fin de un nodo
             {
                 if (tablaHash.ContainsKey(arbol.nombre))
                 {
+                    Console.WriteLine(arbol.nombre + " -> " + arbol.linea.ToString());
                     tablaHash[arbol.nombre].lista.Add(arbol.linea);
                     arbol.valor = tablaHash[arbol.nombre].valor;
                     arbol.tipoNodo = tablaHash[arbol.nombre].tipo;
                 }
                 else
                 {
-                    erroresSemanticos += "La variable " + arbol.nombre + " no ha sido declarada\n";
+                    erroresSemanticos += "Linea " + arbol.linea + ": La variable " + arbol.nombre + " no ha sido declarada\n";
                     return 0; //Significa que la variable x se esta usando cuando NO ESTA DECLARADA
                 }
             }else if(arbol.hijos.Count > 0)
@@ -102,6 +109,7 @@ namespace CompiladorRiquin
         {
             if (tablaHash.ContainsKey(arbol.nombre)) {
                 arbol.tipoNodo = tablaHash[arbol.nombre].tipo;
+                tablaHash[arbol.nombre].lista.Add(arbol.linea);
                 if (arbol.tipoNodo == tipo || (arbol.tipoNodo == TipoNodo.float_number && tipo == TipoNodo.integer)){
                     Console.WriteLine("Variable: " + arbol.nombre + " Valor: " + arbol.valor);
                     tablaHash[arbol.nombre].valor = arbol.valor;
@@ -179,7 +187,7 @@ namespace CompiladorRiquin
             }
             HashElement hashElement = new HashElement();
             hashElement.nombre = nodo.nombre;
-            hashElement.valor = nodo.valor;
+            hashElement.valor = 0;
             hashElement.tipo = nodo.tipoNodo;
             hashElement.location = location.ToString();
             hashElement.lista = new List<int>();

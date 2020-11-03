@@ -113,7 +113,7 @@ public partial class MainWindow
 
 	private global::Gtk.ScrolledWindow GtkScrolledWindow8;
 
-	private global::Gtk.TextView textview10;
+	private global::Gtk.TreeView treeview2;
 
 	private global::Gtk.Label label7;
 
@@ -385,7 +385,7 @@ public partial class MainWindow
 		this.notebook2 = new global::Gtk.Notebook();
 		this.notebook2.CanFocus = true;
 		this.notebook2.Name = "notebook2";
-		this.notebook2.CurrentPage = 3;
+		this.notebook2.CurrentPage = 2;
 		// Container child notebook2.Gtk.Notebook+NotebookChild
 		this.GtkScrolledWindow2 = new global::Gtk.ScrolledWindow();
 		this.GtkScrolledWindow2.Name = "GtkScrolledWindow2";
@@ -426,10 +426,10 @@ public partial class MainWindow
 		this.GtkScrolledWindow8.Name = "GtkScrolledWindow8";
 		this.GtkScrolledWindow8.ShadowType = ((global::Gtk.ShadowType)(1));
 		// Container child GtkScrolledWindow8.Gtk.Container+ContainerChild
-		this.textview10 = new global::Gtk.TextView();
-		this.textview10.CanFocus = true;
-		this.textview10.Name = "textview10";
-		this.GtkScrolledWindow8.Add(this.textview10);
+		this.treeview2 = new global::Gtk.TreeView();
+		this.treeview2.CanFocus = true;
+		this.treeview2.Name = "treeview2";
+		this.GtkScrolledWindow8.Add(this.treeview2);
 		this.notebook2.Add(this.GtkScrolledWindow8);
 		global::Gtk.Notebook.NotebookChild w18 = ((global::Gtk.Notebook.NotebookChild)(this.notebook2[this.GtkScrolledWindow8]));
 		w18.Position = 2;

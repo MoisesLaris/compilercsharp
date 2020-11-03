@@ -587,6 +587,7 @@ namespace CompiladorRiquin
             else if (MainWindow.getToken().getTipo() == TipoToken.ID)
             {
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.id);
+                temp.linea = MainWindow.getToken().getFila();
                 MainWindow.iterator++;
             }
             else

@@ -371,7 +371,7 @@
                   <widget class="Gtk.Notebook" id="notebook2">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">3</property>
+                    <property name="CurrentPage">2</property>
                     <child>
                       <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow2">
                         <property name="MemberName" />
@@ -426,11 +426,10 @@
                         <property name="MemberName" />
                         <property name="ShadowType">In</property>
                         <child>
-                          <widget class="Gtk.TextView" id="textview10">
+                          <widget class="Gtk.TreeView" id="treeview2">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="ShowScrollbars">True</property>
-                            <property name="Text" translatable="yes" />
                           </widget>
                         </child>
                       </widget>
