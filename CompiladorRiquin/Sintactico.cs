@@ -43,11 +43,13 @@ namespace CompiladorRiquin
         public nodo()
         {
             this.nombre = "";
+            this.valor = 0;
         }
         public nodo(string nombre, TipoNodo tipoNodo)
         {
             this.nombre = nombre;
             this.tipoNodo = tipoNodo;
+            this.valor = 0;
         }
         public nodo(string nombre, TipoNodo tipoNodo, float valor)
         {
@@ -329,7 +331,7 @@ namespace CompiladorRiquin
             {
                 temp = new nodo(":=", TipoNodo.exp);
 
-                string s = "";
+                string s;
                 if (MainWindow.getToken().getLexema() == "++")
                 {
                     s = "+";
@@ -340,7 +342,7 @@ namespace CompiladorRiquin
                 }
 
                 nodo mas_menos = new nodo(s, TipoNodo.exp);
-                mas_menos.hijos.Add(izq);
+                mas_menos.hijos.Add(new nodo(izq.nombre, TipoNodo.id));
                 mas_menos.hijos.Add(new nodo("1", TipoNodo.integer,1));
 
                 temp.hijos.Add(izq);

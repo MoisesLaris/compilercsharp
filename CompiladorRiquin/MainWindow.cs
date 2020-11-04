@@ -759,6 +759,7 @@ public partial class MainWindow : Gtk.Window
     public string getTypeNode(nodo arbol)
     {
         string valor = arbol.nombre;
+        Console.WriteLine("Valor de nodo "+ arbol.nombre +":" + arbol.valor);
         switch (arbol.tipoNodo)
         {
             case TipoNodo.integer:

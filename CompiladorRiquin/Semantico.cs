@@ -143,6 +143,7 @@ namespace CompiladorRiquin
                 }
             }else if(arbol.hijos.Count > 0)
             {
+                Console.WriteLine("Tiene mas hijos -> "+ arbol.nombre + " -> " + arbol.valor);
                 arbol.tipoNodo = fnCheckNode(arbol);
             }
 
