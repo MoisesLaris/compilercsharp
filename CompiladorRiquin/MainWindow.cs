@@ -673,6 +673,7 @@ public partial class MainWindow : Gtk.Window
 
         buildHashTable();
 
+        removeAllColumns(treeview2);
 
         //Dibujamos el arbol semantico
         Gtk.TreeViewColumn columna = new Gtk.TreeViewColumn();
@@ -761,13 +762,13 @@ public partial class MainWindow : Gtk.Window
         switch (arbol.tipoNodo)
         {
             case TipoNodo.integer:
-                valor += " (Int: " + arbol.valor.ToString() + " )";
+                valor += " (Int: " + arbol.valor.ToString() + ")";
                 break;
             case TipoNodo.float_number:
-                valor += " (Float: " + arbol.valor.ToString() + " )"; 
+                valor += " (Float: " + arbol.valor.ToString() + ")"; 
                 break;
             case TipoNodo.boolean:
-                valor += " (Bool: " + (arbol.valor == 1 ? "true" : "false") + " )"; 
+                valor += " (Bool: " + (arbol.valor == 1 ? "true" : "false") + ")"; 
                 break;
         }
         return valor;

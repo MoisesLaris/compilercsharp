@@ -49,6 +49,12 @@ namespace CompiladorRiquin
             this.nombre = nombre;
             this.tipoNodo = tipoNodo;
         }
+        public nodo(string nombre, TipoNodo tipoNodo, float valor)
+        {
+            this.nombre = nombre;
+            this.tipoNodo = tipoNodo;
+            this.valor = valor;
+        }
 
 
         public nodo programa()
@@ -335,7 +341,7 @@ namespace CompiladorRiquin
 
                 nodo mas_menos = new nodo(s, TipoNodo.exp);
                 mas_menos.hijos.Add(izq);
-                mas_menos.hijos.Add(new nodo("1", TipoNodo.exp));
+                mas_menos.hijos.Add(new nodo("1", TipoNodo.integer,1));
 
                 temp.hijos.Add(izq);
                 temp.hijos.Add(mas_menos);
@@ -472,7 +478,7 @@ namespace CompiladorRiquin
                         nuevo = new nodo(":=",TipoNodo.exp);
                         nodo mas = new nodo("+", TipoNodo.exp);
                         mas.hijos.Add(temp);
-                        mas.hijos.Add(new nodo("1", TipoNodo.exp));
+                        mas.hijos.Add(new nodo("1", TipoNodo.integer, 1));
 
                         nuevo.hijos.Add(temp);
                         nuevo.hijos.Add(mas);
@@ -483,7 +489,7 @@ namespace CompiladorRiquin
                         nuevo = new nodo(":=", TipoNodo.exp);
                         nodo menos = new nodo("-", TipoNodo.exp);
                         menos.hijos.Add(temp);
-                        menos.hijos.Add(new nodo("1", TipoNodo.exp));
+                        menos.hijos.Add(new nodo("1", TipoNodo.integer, 1));
 
                         nuevo.hijos.Add(temp);
                         nuevo.hijos.Add(menos);

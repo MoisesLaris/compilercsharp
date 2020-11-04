@@ -120,17 +120,21 @@ namespace CompiladorRiquin
                 case "^":
                     arbol.valor = (float)Math.Pow(fnCalcularValor(arbol.hijos[0]), fnCalcularValor(arbol.hijos[1]));
                     break;
+                case "%":
+                    arbol.valor = fnCalcularValor(arbol.hijos[0]) % fnCalcularValor(arbol.hijos[1]);
+                    break;
             }
-            Console.WriteLine(arbol.nombre + " -> " + arbol.linea.ToString());
+            
 
             if (arbol.tipoNodo == TipoNodo.id) //un numero o un id son el fin de un nodo
             {
                 if (tablaHash.ContainsKey(arbol.nombre))
                 {
-                    Console.WriteLine(arbol.nombre + " -> " + arbol.linea.ToString());
+                    Console.WriteLine(arbol.nombre + " -> " + arbol.valor);
                     tablaHash[arbol.nombre].lista.Add(arbol.linea);
                     arbol.valor = tablaHash[arbol.nombre].valor;
                     arbol.tipoNodo = tablaHash[arbol.nombre].tipo;
+                    Console.WriteLine(arbol.nombre + " -> " + arbol.valor);
                 }
                 else
                 {
@@ -142,7 +146,7 @@ namespace CompiladorRiquin
                 arbol.tipoNodo = fnCheckNode(arbol);
             }
 
-
+            Console.WriteLine(arbol.nombre + " -> " + arbol.valor);
 
             return arbol.valor;
         }
@@ -151,7 +155,7 @@ namespace CompiladorRiquin
         {
             if(raiz.hijos[0].tipoNodo != raiz.hijos[1].tipoNodo)
             {
-                if((raiz.hijos[0].tipoNodo == TipoNodo.boolean || raiz.hijos[0].tipoNodo == TipoNodo.boolean))
+                if((raiz.hijos[0].tipoNodo == TipoNodo.boolean || raiz.hijos[1].tipoNodo == TipoNodo.boolean))
                 {
                     erroresSemanticos += "Linea: " + raiz.linea +" .No se puede ejecutar la operacion " + raiz.nombre + " con esos tipos de datos.\n";
                 }
