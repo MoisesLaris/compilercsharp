@@ -51,6 +51,7 @@ namespace CompiladorRiquin
                         listaSentencias(nodo.hijos[0]);
                         fnCheckConditions(nodo.hijos[1]);
                         break;
+                    case "cin":
                     case "cout":
                         fnCalcularValor(nodo.hijos[0]);
                         break;
