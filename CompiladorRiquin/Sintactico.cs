@@ -28,7 +28,8 @@ namespace CompiladorRiquin
         float_number,
         boolean,
         id,
-        undefined
+        undefined,
+        error
 
 
     }

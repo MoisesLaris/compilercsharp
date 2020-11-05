@@ -221,6 +221,8 @@ namespace CompiladorRiquin
 
 
                     erroresSemanticos += "Linea: " + arbol.linea + ". No se puede asignar un valor del tipo " + hasta + " a uno del tipo " + desde + "\n";
+                    arbol.tipoNodo = TipoNodo.error;
+                    arbol.valor = 0;
                 }
             }
             else

@@ -775,6 +775,9 @@ public partial class MainWindow : Gtk.Window
             case TipoNodo.undefined:
                 valor += " (undefined: " + arbol.valor.ToString("F") + ")";
                 break;
+            case TipoNodo.error:
+                valor += " (Error)";
+                break;
         }
         return valor;
     }
