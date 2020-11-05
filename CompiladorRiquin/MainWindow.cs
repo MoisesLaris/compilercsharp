@@ -671,6 +671,7 @@ public partial class MainWindow : Gtk.Window
         Semantico semantico = new Semantico(arbolSintactico);
         semantico.mainSintactico();
 
+        removeAllColumns(nodeview1);
         buildHashTable();
 
         removeAllColumns(treeview2);
@@ -763,13 +764,16 @@ public partial class MainWindow : Gtk.Window
         switch (arbol.tipoNodo)
         {
             case TipoNodo.integer:
-                valor += " (Int: " + arbol.valor.ToString() + ")";
+                valor += " (Int: " + arbol.valor.ToString("N0") + ")";
                 break;
             case TipoNodo.float_number:
-                valor += " (Float: " + arbol.valor.ToString() + ")"; 
+                valor += " (Float: " + arbol.valor.ToString("F") + ")"; 
                 break;
             case TipoNodo.boolean:
                 valor += " (Bool: " + (arbol.valor == 1 ? "true" : "false") + ")"; 
+                break;
+            case TipoNodo.undefined:
+                valor += " (undefined: " + arbol.valor.ToString("F") + ")";
                 break;
         }
         return valor;

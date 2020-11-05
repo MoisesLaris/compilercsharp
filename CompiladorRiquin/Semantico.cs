@@ -51,7 +51,9 @@ namespace CompiladorRiquin
                         listaSentencias(nodo.hijos[0]);
                         fnCheckConditions(nodo.hijos[1]);
                         break;
-
+                    case "cout":
+                        fnCalcularValor(nodo.hijos[0]);
+                        break;
                 }
             });
             
@@ -115,7 +117,24 @@ namespace CompiladorRiquin
                     arbol.valor = fnCalcularValor(arbol.hijos[0]) * fnCalcularValor(arbol.hijos[1]);
                     break;
                 case "/":
-                    arbol.valor = fnCalcularValor(arbol.hijos[0]) / fnCalcularValor(arbol.hijos[1]);
+                    if(arbol.hijos[0].tipoNodo == TipoNodo.integer && arbol.hijos[1].tipoNodo == TipoNodo.integer)
+                    {
+                        float valor = 0;
+                        var hijoderecho = fnCalcularValor(arbol.hijos[1]);
+                        if(hijoderecho == 0)
+                        {
+                            erroresSemanticos += "Linea: "+ arbol.hijos[1].linea +".No se puede dividir entre 0;";
+                        }
+                        else
+                        {
+                            valor = fnCalcularValor(arbol.hijos[0]) / hijoderecho;
+                        }
+                        arbol.valor = (float)Math.Truncate(valor);
+                    }
+                    else
+                    {
+                        arbol.valor = fnCalcularValor(arbol.hijos[0]) / fnCalcularValor(arbol.hijos[1]);
+                    }
                     break;
                 case "^":
                     arbol.valor = (float)Math.Pow(fnCalcularValor(arbol.hijos[0]), fnCalcularValor(arbol.hijos[1]));
@@ -138,7 +157,8 @@ namespace CompiladorRiquin
                 }
                 else
                 {
-                    erroresSemanticos += "Linea " + arbol.linea + ": La variable " + arbol.nombre + " no ha sido declarada\n";
+                    arbol.tipoNodo = TipoNodo.undefined;
+                    erroresSemanticos += "Linea " + arbol.linea + ": La variable '" + arbol.nombre + "' no ha sido declarada\n";
                     return 0; //Significa que la variable x se esta usando cuando NO ESTA DECLARADA
                 }
             }else if(arbol.hijos.Count > 0)
@@ -156,7 +176,7 @@ namespace CompiladorRiquin
         {
             if(raiz.hijos[0].tipoNodo != raiz.hijos[1].tipoNodo)
             {
-                if((raiz.hijos[0].tipoNodo == TipoNodo.boolean || raiz.hijos[1].tipoNodo == TipoNodo.boolean))
+                if(raiz.hijos[0].tipoNodo == TipoNodo.boolean || raiz.hijos[1].tipoNodo == TipoNodo.boolean)
                 {
                     erroresSemanticos += "Linea: " + raiz.linea +" .No se puede ejecutar la operacion " + raiz.nombre + " con esos tipos de datos.\n";
                 }
@@ -175,7 +195,10 @@ namespace CompiladorRiquin
                 tablaHash[arbol.nombre].lista.Add(arbol.linea);
                 if (arbol.tipoNodo == tipo || (arbol.tipoNodo == TipoNodo.float_number && tipo == TipoNodo.integer)){
                     Console.WriteLine("Variable: " + arbol.nombre + " Valor: " + arbol.valor);
-                    tablaHash[arbol.nombre].valor = arbol.valor;
+                    float valor = arbol.valor;
+                    if (arbol.tipoNodo == TipoNodo.integer)
+                        valor = (float)Math.Truncate(valor);
+                    tablaHash[arbol.nombre].valor = valor;
                     return;
                 }
                 else
@@ -201,7 +224,8 @@ namespace CompiladorRiquin
             }
             else
             {
-                erroresSemanticos += "La variable " + arbol.nombre + " no ha sido declarada\n";
+                arbol.tipoNodo = TipoNodo.undefined;
+                erroresSemanticos += "Linea: "+ arbol.linea+" .La variable '" + arbol.nombre + "' no ha sido declarada\n";
             }
 
         }
@@ -245,7 +269,7 @@ namespace CompiladorRiquin
         {
             if (tablaHash.ContainsKey(nodo.nombre))
             {
-                erroresSemanticos += "Variable: " + nodo.nombre + " duplicada en linea:" + nodo.linea + "\n";
+                erroresSemanticos += "Linea: " + nodo.linea +". Variable: " + nodo.nombre + " duplicada.:" + "\n";
                 return;
             }
             HashElement hashElement = new HashElement();
