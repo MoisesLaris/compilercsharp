@@ -51,6 +51,7 @@
     <Compile Include="Token.cs" />
     <Compile Include="Sintactico.cs" />
     <Compile Include="Semantico.cs" />
+    <Compile Include="IntermediateCode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

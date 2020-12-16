@@ -26,7 +26,8 @@ public partial class MainWindow : Gtk.Window
     public static int iterator = 0;
 
     //Arbol generado en analizador sintactico
-    public static nodo arbolSintactico;
+
+    public static nodo arbolCompilador;
 
     public MainWindow() : base(Gtk.WindowType.Toplevel)
     {
@@ -602,7 +603,7 @@ public partial class MainWindow : Gtk.Window
         verArbol(nodo, lista);
         treeview1.ExpandAll(); //Propiedad para expandir el arbol
 
-        arbolSintactico = nodo; //Asignamos el arbol del analizador sintactico a nuestra variable estatica
+        arbolCompilador = nodo; //Asignamos el arbol del analizador sintactico a nuestra variable estatica
     }
 
     public void verArbol(nodo arbol, TreeStore lista)
@@ -661,14 +662,16 @@ public partial class MainWindow : Gtk.Window
 
     protected void OnEjecutarSemantico(object sender, EventArgs e)
     {
-        if(arbolSintactico == null)
+
+        if(arbolCompilador == null)
         {
             return;
         }
 
 
         Semantico.fnResetRun(); //Se resetea diccionario y String de errores semanticos
-        Semantico semantico = new Semantico(arbolSintactico);
+
+        Semantico semantico = new Semantico(arbolCompilador);
         semantico.mainSintactico();
 
         removeAllColumns(nodeview1);
@@ -690,6 +693,8 @@ public partial class MainWindow : Gtk.Window
         Gtk.TreeStore lista = new Gtk.TreeStore(typeof(string));
         verArbolSemantico(semantico.getArbol(), lista);
         treeview2.ExpandAll(); //Propiedad para expandir el arbol
+
+        arbolCompilador = semantico.getArbol();
 
     }
 
@@ -782,6 +787,20 @@ public partial class MainWindow : Gtk.Window
         return valor;
     }
 
+
+    protected void onEjecutarCodigoIntermedio(object sender, EventArgs e)
+    {
+        if(arbolCompilador == null)
+        {
+            return;
+        }
+
+        IntermediateCode intermediateCode = new IntermediateCode(arbolCompilador);
+        intermediateCode.ejectIntermediateCode();
+
+        textview12.Buffer.Text = IntermediateCode.codigoIntermedio;
+
+    }
 }
 
 [Gtk.TreeNode(ListOnly = true)]

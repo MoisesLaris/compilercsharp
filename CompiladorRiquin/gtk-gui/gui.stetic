@@ -180,6 +180,12 @@
         <property name="ShortLabel" translatable="yes">Ejecutar</property>
         <signal name="Activated" handler="OnEjecutarSemantico" />
       </action>
+      <action id="EjecutarAction7">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Ejecutar</property>
+        <property name="ShortLabel" translatable="yes">Ejecutar</property>
+        <signal name="Activated" handler="onEjecutarCodigoIntermedio" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
@@ -260,7 +266,9 @@
                   <node type="Menu" action="SemanticoAction">
                     <node type="Menuitem" action="EjecutarAction6" />
                   </node>
-                  <node type="Menu" action="CompilarAction" />
+                  <node type="Menu" action="CompilarAction">
+                    <node type="Menuitem" action="EjecutarAction7" />
+                  </node>
                   <node type="Menu" action="Action" />
                 </node>
               </widget>
@@ -372,7 +380,7 @@
                   <widget class="Gtk.Notebook" id="notebook2">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="CurrentPage">2</property>
+                    <property name="CurrentPage">4</property>
                     <child>
                       <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow2">
                         <property name="MemberName" />
