@@ -8,8 +8,8 @@ namespace CompiladorRiquin
         public static string erroresCodigoIntermedio = "";
 
         //Variables a definir
-        public int emitLoc = 0;
-        public int highEmitLoc = 0;
+        public static int emitLoc = 0;
+        public static int highEmitLoc = 0;
         public int pc = 7;
 
         //DEFINE
@@ -32,8 +32,10 @@ namespace CompiladorRiquin
             if(Semantico.erroresSemanticos != "")
             {
                 erroresCodigoIntermedio = "Errores semanticos pendientes";
+                return;
             }
-
+            emitLoc = 0;
+            highEmitLoc = 0;
             codeIntermediate_process(this.arbol.hijos[1]);
 
             //imprimimos en pantalla el codigo
