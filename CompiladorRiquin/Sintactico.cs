@@ -45,10 +45,7 @@ namespace CompiladorRiquin
         public string nombre;
         public TipoNodo tipoNodo;
         public Tipo tipo;
-<<<<<<< HEAD
-=======
         public TipoNodo tipoNodoStatic;
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
         public float valor;
         public int linea;
         public List<nodo> hijos = new List<nodo>(); 
@@ -58,33 +55,20 @@ namespace CompiladorRiquin
             this.nombre = "";
             this.valor = 0;
         }
-<<<<<<< HEAD
-        public nodo(string nombre, TipoNodo tipoNodo, Tipo tipo)
-=======
         public nodo(string nombre, TipoNodo tipoNodo, Tipo tipo, TipoNodo tipoNodoStatic)
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
         {
             this.nombre = nombre;
             this.tipo = tipo;
             this.tipoNodo = tipoNodo;
-<<<<<<< HEAD
-            this.valor = 0;
-        }
-        public nodo(string nombre, TipoNodo tipoNodo, Tipo tipo, float valor)
-=======
             this.tipoNodoStatic = tipoNodoStatic;
             this.valor = 0;
         }
         public nodo(string nombre, TipoNodo tipoNodo, Tipo tipo, TipoNodo tipoNodoStatic, float valor)
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
         {
             this.nombre = nombre;
             this.tipoNodo = tipoNodo;
             this.tipo = tipo;
-<<<<<<< HEAD
-=======
             this.tipoNodoStatic = tipoNodoStatic;
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             this.valor = valor;
         }
 
@@ -95,11 +79,7 @@ namespace CompiladorRiquin
             if(MainWindow.getToken().getLexema() == "main")
             {
                 match("main");
-<<<<<<< HEAD
-                temp = new nodo("main", TipoNodo.exp, Tipo.expresion);
-=======
                 temp = new nodo("main", TipoNodo.exp, Tipo.expresion, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 match("{");
                 //temp.nodos[0] = lista_declaracion();
                 temp.hijos.Add(lista_declaracion());
@@ -117,11 +97,7 @@ namespace CompiladorRiquin
 
         public nodo lista_declaracion()
         {
-<<<<<<< HEAD
-            nodo temp = new nodo("declaracion", TipoNodo.exp, Tipo.expresion);
-=======
             nodo temp = new nodo("declaracion", TipoNodo.exp, Tipo.expresion, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             nodo q = declaracion();
             if(q != null)
                 temp.hijos.Add(q);
@@ -227,15 +203,6 @@ namespace CompiladorRiquin
             switch (MainWindow.getToken().getLexema())
             {
                 case "int":
-<<<<<<< HEAD
-                    temp = createVariableType("int", TipoNodo.integer, Tipo.constante);
-                    break;
-                case "float":
-                    temp = createVariableType("float", TipoNodo.float_number, Tipo.constante);
-                    break;
-                case "boolean":
-                    temp = createVariableType("boolean", TipoNodo.boolean, Tipo.constante);
-=======
                     temp = createVariableType("int", TipoNodo.integer, Tipo.constante, TipoNodo.exp);
                     break;
                 case "float":
@@ -243,22 +210,15 @@ namespace CompiladorRiquin
                     break;
                 case "boolean":
                     temp = createVariableType("boolean", TipoNodo.boolean, Tipo.constante, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                     break;
             
             }
             return temp;
         }
 
-<<<<<<< HEAD
-        public nodo createVariableType(string variable, TipoNodo tipo, Tipo tipo1)
-        {
-            nodo temp = new nodo(variable, tipo, tipo1);
-=======
         public nodo createVariableType(string variable, TipoNodo tipo, Tipo tipo1, TipoNodo tipoStatic)
         {
             nodo temp = new nodo(variable, tipo, tipo1, tipoStatic);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             match(variable);
             return temp;
         }
@@ -285,11 +245,7 @@ namespace CompiladorRiquin
 
         public nodo lista_sentencia()
         {
-<<<<<<< HEAD
-            nodo temp = new nodo("sentencias",TipoNodo.sent, Tipo.sentencia);
-=======
             nodo temp = new nodo("sentencias",TipoNodo.sent, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             nodo s = new nodo();
             temp.hijos.Add(sentencia());
             while(MainWindow.getToken().getLexema() != "end" && MainWindow.getToken().getLexema() != "else" && MainWindow.getToken().getLexema() != "until" && MainWindow.getToken().getLexema() != "}" && MainWindow.iterator < MainWindow.listaTokens.Count)
@@ -346,11 +302,7 @@ namespace CompiladorRiquin
 
         public nodo condicion()
         {
-<<<<<<< HEAD
-            nodo temp = new nodo("if", TipoNodo.sent, Tipo.sentencia);
-=======
             nodo temp = new nodo("if", TipoNodo.sent, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             match("if");
 
             //temp.nodos[0] = exp();
@@ -381,11 +333,7 @@ namespace CompiladorRiquin
            
             if (MainWindow.getToken().getLexema() == ":=")
             {
-<<<<<<< HEAD
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp, Tipo.sentencia);
-=======
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 match(":=");
                 temp.hijos.Add(izq);
                 temp.hijos.Add(exp());
@@ -395,11 +343,7 @@ namespace CompiladorRiquin
             }
             else if (MainWindow.getToken().getLexema() == "++" || MainWindow.getToken().getLexema() == "--")
             {
-<<<<<<< HEAD
-                temp = new nodo(":=", TipoNodo.exp, Tipo.sentencia);
-=======
                 temp = new nodo(":=", TipoNodo.exp, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 
                 string s;
                 if (MainWindow.getToken().getLexema() == "++")
@@ -411,15 +355,9 @@ namespace CompiladorRiquin
                     s = "-";
                 }
 
-<<<<<<< HEAD
-                nodo mas_menos = new nodo(s, TipoNodo.exp, Tipo.expresion);
-                mas_menos.hijos.Add(new nodo(izq.nombre, TipoNodo.id, Tipo.constante));
-                mas_menos.hijos.Add(new nodo("1", TipoNodo.integer, Tipo.constante, 1));
-=======
                 nodo mas_menos = new nodo(s, TipoNodo.exp, Tipo.expresion, TipoNodo.exp);
                 mas_menos.hijos.Add(new nodo(izq.nombre, TipoNodo.id, Tipo.id, TipoNodo.exp));
                 mas_menos.hijos.Add(new nodo("1", TipoNodo.integer, Tipo.constante, TipoNodo.exp, 1));
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 
                 temp.hijos.Add(izq);
                 temp.hijos.Add(mas_menos);
@@ -439,11 +377,7 @@ namespace CompiladorRiquin
 
         public nodo cin()
         {
-<<<<<<< HEAD
-            nodo temp = new nodo("cin", TipoNodo.sent, Tipo.sentencia);
-=======
             nodo temp = new nodo("cin", TipoNodo.sent, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             match("cin");
             if(MainWindow.getToken().getTipo() == TipoToken.ID)
             {
@@ -461,11 +395,7 @@ namespace CompiladorRiquin
 
         public nodo cout()
         {
-<<<<<<< HEAD
-            nodo temp = new nodo("cout",TipoNodo.sent, Tipo.sentencia);
-=======
             nodo temp = new nodo("cout",TipoNodo.sent, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             match("cout");
             temp.hijos.Add(exp());
             match(";");
@@ -475,11 +405,7 @@ namespace CompiladorRiquin
 
         public nodo repeticion()
         {
-<<<<<<< HEAD
-            nodo temp = new nodo("do", TipoNodo.sent, Tipo.sentencia);
-=======
             nodo temp = new nodo("do", TipoNodo.sent, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             match("do");
             //temp.nodos[0] = lista_sentencia();
             temp.hijos.Add(lista_sentencia());
@@ -494,11 +420,7 @@ namespace CompiladorRiquin
 
         public nodo iteracion()
         {
-<<<<<<< HEAD
-            nodo temp = new nodo("while", TipoNodo.sent, Tipo.sentencia);
-=======
             nodo temp = new nodo("while", TipoNodo.sent, Tipo.sentencia, TipoNodo.sent);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
             match("while");
             match("(");
             temp.hijos.Add(exp());
@@ -523,11 +445,7 @@ namespace CompiladorRiquin
             temp = exp_simple();
             while(MainWindow.getToken().getLexema() == "<=" || MainWindow.getToken().getLexema() == "<" || MainWindow.getToken().getLexema() == ">=" || MainWindow.getToken().getLexema() == ">" || MainWindow.getToken().getLexema() == "==" || MainWindow.getToken().getLexema() == "!=")
             {
-<<<<<<< HEAD
-                nuevo = new nodo(MainWindow.getToken().getLexema(),TipoNodo.exp, Tipo.operador);
-=======
                 nuevo = new nodo(MainWindow.getToken().getLexema(),TipoNodo.exp, Tipo.operador, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 match(MainWindow.getToken().getLexema());
                 //nuevo.nodos[0] = temp;
                 //nuevo.nodos[1] = exp_simple();
@@ -554,11 +472,8 @@ namespace CompiladorRiquin
                     case "+":
                         nuevo = new nodo();
                         nuevo.nombre = MainWindow.getToken().getLexema();
-<<<<<<< HEAD
-=======
                         nuevo.tipoNodoStatic = TipoNodo.exp;
                         nuevo.tipo = Tipo.operador;
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                         match("+");
                         //nuevo.nodos[0] = temp;
                         //nuevo.nodos[1] = term();
@@ -570,11 +485,8 @@ namespace CompiladorRiquin
                     case "-":
                         nuevo = new nodo();
                         nuevo.nombre = MainWindow.getToken().getLexema();
-<<<<<<< HEAD
-=======
                         nuevo.tipoNodoStatic = TipoNodo.exp;
                         nuevo.tipo = Tipo.operador;
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                         match("-");
                         //nuevo.nodos[0] = temp;
                         //nuevo.nodos[1] = term();
@@ -583,17 +495,10 @@ namespace CompiladorRiquin
                         temp = nuevo;
                         break;
                     case "++":
-<<<<<<< HEAD
-                        nuevo = new nodo(":=",TipoNodo.exp, Tipo.expresion);
-                        nodo mas = new nodo("+", TipoNodo.exp, Tipo.operador);
-                        mas.hijos.Add(temp);
-                        mas.hijos.Add(new nodo("1", TipoNodo.integer, Tipo.constante, 1));
-=======
                         nuevo = new nodo(":=",TipoNodo.exp, Tipo.sentencia, TipoNodo.sent);
                         nodo mas = new nodo("+", TipoNodo.exp, Tipo.operador, TipoNodo.exp);
                         mas.hijos.Add(temp);
                         mas.hijos.Add(new nodo("1", TipoNodo.integer, Tipo.constante, TipoNodo.exp, 1));
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 
                         nuevo.hijos.Add(temp);
                         nuevo.hijos.Add(mas);
@@ -601,17 +506,10 @@ namespace CompiladorRiquin
                         temp = nuevo;
                         break;
                     case "--":
-<<<<<<< HEAD
-                        nuevo = new nodo(":=", TipoNodo.exp, Tipo.expresion);
-                        nodo menos = new nodo("-", TipoNodo.exp, Tipo.operador);
-                        menos.hijos.Add(temp);
-                        menos.hijos.Add(new nodo("1", TipoNodo.integer, Tipo.constante, 1));
-=======
                         nuevo = new nodo(":=", TipoNodo.exp, Tipo.sentencia, TipoNodo.sent);
                         nodo menos = new nodo("-", TipoNodo.exp, Tipo.operador, TipoNodo.exp);
                         menos.hijos.Add(temp);
                         menos.hijos.Add(new nodo("1", TipoNodo.integer, Tipo.constante, TipoNodo.exp, 1));
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 
                         nuevo.hijos.Add(temp);
                         nuevo.hijos.Add(menos);
@@ -633,11 +531,7 @@ namespace CompiladorRiquin
                 switch (MainWindow.getToken().getLexema())
                 {
                     case "*":
-<<<<<<< HEAD
-                        nuevo = new nodo("*", TipoNodo.exp, Tipo.operador);
-=======
                         nuevo = new nodo("*", TipoNodo.exp, Tipo.operador, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                         match("*");
                         //nuevo.nodos[0] = temp;
                         //nuevo.nodos[1] = fac();
@@ -646,11 +540,7 @@ namespace CompiladorRiquin
                         temp = nuevo;
                         break;
                     case "/":
-<<<<<<< HEAD
-                        nuevo = new nodo("/", TipoNodo.exp, Tipo.operador);
-=======
                         nuevo = new nodo("/", TipoNodo.exp, Tipo.operador, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                         match("/");
                         //nuevo.nodos[0] = temp;
                         //nuevo.nodos[1] = fac();
@@ -659,11 +549,7 @@ namespace CompiladorRiquin
                         temp = nuevo;
                         break;
                     case "%":
-<<<<<<< HEAD
-                        nuevo = new nodo("%", TipoNodo.exp, Tipo.operador);
-=======
                         nuevo = new nodo("%", TipoNodo.exp, Tipo.operador, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                         match("%");
                         //nuevo.nodos[0] = temp;
                         //nuevo.nodos[1] = fac();
@@ -686,11 +572,7 @@ namespace CompiladorRiquin
             {
                 if (MainWindow.getToken().getLexema() == "^")
                 {
-<<<<<<< HEAD
-                    nuevo = new nodo("^", TipoNodo.exp, Tipo.operador);
-=======
                     nuevo = new nodo("^", TipoNodo.exp, Tipo.operador, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                     match("^");
                     nuevo.hijos.Add(temp);
                     nuevo.hijos.Add(fin());
@@ -717,32 +599,20 @@ namespace CompiladorRiquin
             else if (int.TryParse(MainWindow.getToken().getLexema(), out integer))
             {
                 Console.WriteLine("Numero entero -> " + integer);
-<<<<<<< HEAD
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.integer, Tipo.constante);
-=======
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.integer, Tipo.constante, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 temp.valor = integer;
                 MainWindow.iterator++;
             }
             else if (float.TryParse(MainWindow.getToken().getLexema(), out real))
             {
                 Console.WriteLine("Numero real -> " + real);
-<<<<<<< HEAD
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.float_number, Tipo.constante);
-=======
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.float_number, Tipo.constante, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 temp.valor = real;
                 MainWindow.iterator++;
             }
             else if (MainWindow.getToken().getTipo() == TipoToken.ID)
             {
-<<<<<<< HEAD
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.id, Tipo.id);
-=======
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.id, Tipo.id, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 temp.linea = MainWindow.getToken().getFila();
                 MainWindow.iterator++;
             }
@@ -759,11 +629,7 @@ namespace CompiladorRiquin
             nodo temp = null;
             if(MainWindow.getToken().getTipo() == TipoToken.ID)
             {
-<<<<<<< HEAD
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.id, Tipo.id);
-=======
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.id, Tipo.id, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 temp.linea = MainWindow.getToken().getFila();
                 MainWindow.iterator++;
             }
@@ -775,11 +641,7 @@ namespace CompiladorRiquin
             nodo temp = null;
             if (MainWindow.getToken().getTipo() == TipoToken.ID_RESERVED)
             {
-<<<<<<< HEAD
-                temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp, Tipo.id);
-=======
                 temp = new nodo(MainWindow.getToken().getLexema(), TipoNodo.exp, Tipo.id, TipoNodo.exp);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
                 MainWindow.iterator++;
             }
                 return temp;

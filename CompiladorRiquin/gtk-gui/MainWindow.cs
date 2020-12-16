@@ -69,11 +69,8 @@ public partial class MainWindow
 
 	private global::Gtk.Action EjecutarAction6;
 
-<<<<<<< HEAD
-=======
 	private global::Gtk.Action EjecutarAction7;
 
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 	private global::Gtk.VBox vbox1;
 
 	private global::Gtk.HBox hbox3;
@@ -267,12 +264,9 @@ public partial class MainWindow
 		this.EjecutarAction6 = new global::Gtk.Action("EjecutarAction6", global::Mono.Unix.Catalog.GetString("Ejecutar"), null, null);
 		this.EjecutarAction6.ShortLabel = global::Mono.Unix.Catalog.GetString("Ejecutar");
 		w1.Add(this.EjecutarAction6, null);
-<<<<<<< HEAD
-=======
 		this.EjecutarAction7 = new global::Gtk.Action("EjecutarAction7", global::Mono.Unix.Catalog.GetString("Ejecutar"), null, null);
 		this.EjecutarAction7.ShortLabel = global::Mono.Unix.Catalog.GetString("Ejecutar");
 		w1.Add(this.EjecutarAction7, null);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -316,11 +310,7 @@ public partial class MainWindow
 		w4.Position = 2;
 		w4.Expand = false;
 		// Container child hbox3.Gtk.Box+BoxChild
-<<<<<<< HEAD
-		this.UIManager.AddUiFromString(@"<ui><menubar name='menubar5'><menu name='LexicoAction' action='LexicoAction'><menuitem name='EjecutarAction' action='EjecutarAction'/></menu><menu name='SintacticoAction' action='SintacticoAction'><menuitem name='EjecutarAction5' action='EjecutarAction5'/></menu><menu name='SemanticoAction' action='SemanticoAction'><menuitem name='EjecutarAction6' action='EjecutarAction6'/></menu><menu name='CompilarAction' action='CompilarAction'/><menu name='Action' action='Action'/></menubar></ui>");
-=======
 		this.UIManager.AddUiFromString(@"<ui><menubar name='menubar5'><menu name='LexicoAction' action='LexicoAction'><menuitem name='EjecutarAction' action='EjecutarAction'/></menu><menu name='SintacticoAction' action='SintacticoAction'><menuitem name='EjecutarAction5' action='EjecutarAction5'/></menu><menu name='SemanticoAction' action='SemanticoAction'><menuitem name='EjecutarAction6' action='EjecutarAction6'/></menu><menu name='CompilarAction' action='CompilarAction'><menuitem name='EjecutarAction7' action='EjecutarAction7'/></menu><menu name='Action' action='Action'/></menubar></ui>");
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 		this.menubar5 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget("/menubar5")));
 		this.menubar5.Name = "menubar5";
 		this.hbox3.Add(this.menubar5);
@@ -400,11 +390,7 @@ public partial class MainWindow
 		this.notebook2 = new global::Gtk.Notebook();
 		this.notebook2.CanFocus = true;
 		this.notebook2.Name = "notebook2";
-<<<<<<< HEAD
-		this.notebook2.CurrentPage = 2;
-=======
 		this.notebook2.CurrentPage = 4;
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 		// Container child notebook2.Gtk.Notebook+NotebookChild
 		this.GtkScrolledWindow2 = new global::Gtk.ScrolledWindow();
 		this.GtkScrolledWindow2.Name = "GtkScrolledWindow2";
@@ -646,10 +632,7 @@ public partial class MainWindow
 		this.EjecutarAction.Activated += new global::System.EventHandler(this.OnEjecutarActionActivated);
 		this.EjecutarAction5.Activated += new global::System.EventHandler(this.OnEjecutarAction1Activated);
 		this.EjecutarAction6.Activated += new global::System.EventHandler(this.OnEjecutarSemantico);
-<<<<<<< HEAD
-=======
 		this.EjecutarAction7.Activated += new global::System.EventHandler(this.onEjecutarCodigoIntermedio);
->>>>>>> 21d5f21... Initial check-in of module CompiladorRiquin
 		this.textview3.PasteClipboard += new global::System.EventHandler(this.OnTextview3PasteClipboard);
 		this.textview3.InsertAtCursor += new global::Gtk.InsertAtCursorHandler(this.OnTextview3InsertAtCursor);
 		this.textview3.CutClipboard += new global::System.EventHandler(this.OnTextview3CutClipboard);
