@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
+
 namespace CompiladorRiquin
 {
     public class IntermediateCode
@@ -38,8 +41,11 @@ namespace CompiladorRiquin
             highEmitLoc = 0;
             codeIntermediate_process(this.arbol.hijos[1]);
 
-            //imprimimos en pantalla el codigo
-            //guardamos el codigo en un archivo de texto
+
+            var path = @"./data.txt";
+
+            File.WriteAllText(path, codigoIntermedio);
+
         }
 
 
