@@ -81,6 +81,7 @@ namespace CompiladorRiquin
             caracteresEspeciales.Add("*", "Multiplicacion");
             caracteresEspeciales.Add("/", "Diagonal");
             caracteresEspeciales.Add("%", "Porcentaje");
+            caracteresEspeciales.Add("^", "Potencia");
             caracteresEspeciales.Add(";", "Fin de sentencia");
             caracteresEspeciales.Add(",", "Coma");
 

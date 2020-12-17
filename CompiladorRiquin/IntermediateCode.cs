@@ -107,6 +107,12 @@ namespace CompiladorRiquin
                             case "/":
                                 emitRO("DIV", ac, ac1, ac, "op /");
                                 break;
+                            case "^":
+                                emitRO("POT", ac, ac1, ac, "op ^");
+                                break;
+                            case "%":
+                                emitRO("MOD", ac, ac1, ac, "op %");
+                                break;
                             case "<":
                                 emitRO("SUB", ac, ac1, ac, "op <");
                                 emitRM("JLT", ac, 2, pc, "br if true");
