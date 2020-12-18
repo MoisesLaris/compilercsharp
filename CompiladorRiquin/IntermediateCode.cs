@@ -62,16 +62,19 @@ namespace CompiladorRiquin
 
         public void cGen(nodo arbol)
         {
-            Console.WriteLine(arbol.nombre + " - " + arbol.tipoNodoStatic);
-            switch (arbol.tipoNodoStatic)
+            if(arbol != null)
             {
-                case TipoNodo.exp:
-                    genExp(arbol);
-                    break;
-                case TipoNodo.sent:
-                    genStmt(arbol);
-                    break;
+                switch (arbol.tipoNodoStatic)
+                {
+                    case TipoNodo.exp:
+                        genExp(arbol);
+                        break;
+                    case TipoNodo.sent:
+                        genStmt(arbol);
+                        break;
+                }
             }
+            
         }
 
         public void genExp(nodo arbol)
@@ -186,7 +189,12 @@ namespace CompiladorRiquin
                     case "if":
                         cGen(arbol.hijos[0]);
                         savedLoc1 = emitSkip(1);
-                        cGen(arbol.hijos[1].hijos[0]);
+
+                        foreach (var rama in arbol.hijos[1].hijos)
+                        {
+                            cGen(rama);
+                        }
+
                         savedLoc2 = emitSkip(1);
                         currentLoc = emitSkip(0);
                         emitBackup(savedLoc1);
@@ -194,12 +202,15 @@ namespace CompiladorRiquin
                         emitRestore();
                         if(arbol.hijos.Count > 2)
                         {
-                            cGen(arbol.hijos[2].hijos[0].hijos[0]);
-                            currentLoc = emitSkip(0);
-                            emitBackup(savedLoc2);
-                            emitRM_Abs("LDA", pc, currentLoc, "jmp to end");
-                            emitRestore();
+                            foreach (var rama in arbol.hijos[2].hijos)
+                            {
+                                cGen(rama);
+                            }
                         }
+                        currentLoc = emitSkip(0);
+                        emitBackup(savedLoc2);
+                        emitRM_Abs("LDA", pc, currentLoc, "jmp to end");
+                        emitRestore();
                         break;
                     case "do":
                         savedLoc1 = emitSkip(0);
