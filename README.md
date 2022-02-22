@@ -1,4 +1,4 @@
 # compilercsharp
-Compiler implemented in c# with GTK graphics
+Compiler implemented in c# with GTK graphics.
 
-Developed by MoisesLaris and DianaPaula1
+Developed by MoisesLaris and DianaPaula1.
